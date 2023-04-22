@@ -53,12 +53,11 @@ def SimpleMovingAverage(point_list, window_size = 100):
 
 def main():
 	parser = argparse.ArgumentParser(description = "draw a figure from two csv file.")
-	#parser.add_argument("-o",     metavar = "output_prefix", type = str, default = "distribution.svg", help = "output file name (default = distribution.svg)")
-	#parser.add_argument("--title",metavar = "title", type = str, default = "Distribution of X and Y measurements", help = "graph title (default = Distribution of X and Y measurements)")
-
-	#args = parser.parse_args()
-	X_values_128_highspeed = file_parser("merge_data_128_highspeed.csv", column = 0)
-	Y_values_128_highspeed = file_parser("merge_data_128_highspeed.csv", column = 1)
+	parser.add_argument("csv_highspeed", metavar = "csv_highspeed", type = str,  help = "csv_highspeed file name")
+	parser.add_argument("csv_rowspeed",  metavar = "csv_rowspeed",  type = str,  help = "csv_rowspeed  file name")
+	args = parser.parse_args()
+	X_values_128_highspeed = file_parser(args.csv_highspeed, column = 0)
+	Y_values_128_highspeed = file_parser(args.csv_highspeed, column = 1)
 	X_length = len(X_values_128_highspeed)
 	Y_length = len(Y_values_128_highspeed)
 	mijikai_hou_128_highspeed = min(X_length, Y_length)
@@ -66,8 +65,8 @@ def main():
 	Y_values_128_highspeed = Y_values_128_highspeed[0:mijikai_hou_128_highspeed]
 
 
-	X_values_rowspeed = file_parser("Dobot_data_0330_row_speed_2.csv", column = 2)
-	Y_values_rowspeed = file_parser("Dobot_data_0330_row_speed_2.csv", column = 3)
+	X_values_rowspeed = file_parser(args.csv_rowspeed, column = 2)
+	Y_values_rowspeed = file_parser(args.csv_rowspeed, column = 3)
 	X_length = len(X_values_rowspeed)
 	Y_length = len(Y_values_rowspeed)
 	mijikai_hou_rowspeed = min(X_length, Y_length)
